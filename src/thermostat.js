@@ -29,6 +29,10 @@ function Thermostat() {
   Thermostat.prototype.switchInvert = function () {
     this._powerSavingSwitch = !this._powerSavingSwitch;
   }
+  
+  Thermostat.prototype.reset = function () {
+    this._temperature = 20;
+  }
 
 
 

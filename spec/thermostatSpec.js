@@ -38,4 +38,9 @@ describe("Thermostat", function(){
       expect(thermostat.getTemperature()).toEqual(32);
   });
 
+  it("resets the temperature to 20 degrees", function(){
+      thermostat.reset();
+      expect(thermostat.getTemperature()).toEqual(20);
+  });
+
 });
