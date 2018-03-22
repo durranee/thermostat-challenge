@@ -45,19 +45,19 @@ describe("Thermostat", function(){
 
 
   it("returns the info on current energy usage Medium", function(){
-      expect(thermostat.energyUsage()).toEqual("Medium Usage");
+      expect(thermostat.energyUsage()).toEqual("Energy Usage: Medium");
   });
 
   it("returns the info on current energy usage Low", function(){
     for (var i = 0; i < 5; i++)
         thermostat.down();
-      expect(thermostat.energyUsage()).toEqual("Low Usage");
+      expect(thermostat.energyUsage()).toEqual("Energy Usage: Low");
   });
 
   it("returns the info on current energy usage High", function(){
     for (var i = 0; i < 10; i++)
       thermostat.up();
-      expect(thermostat.energyUsage()).toEqual("High Usage");
+      expect(thermostat.energyUsage()).toEqual("Energy Usage: High");
   });
 
 });
