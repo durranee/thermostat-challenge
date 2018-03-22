@@ -18,4 +18,9 @@ describe("Thermostat", function(){
     expect(thermostat.getTemperature()).toEqual(19);
   });
 
+  it("stops decreasing the temperature below 10", function(){
+    for (var i = 0; i < 12; i++)
+      thermostat.down();
+      expect(thermostat.getTemperature()).toEqual(10);
+  });
 });
