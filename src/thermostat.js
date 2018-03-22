@@ -9,12 +9,12 @@ function Thermostat() {
     return this._temperature;
   };
 
-   Thermostat.prototype.switchCheck = function () {
+   Thermostat.prototype.powerSaverStatus = function () {
     return this._powerSavingSwitch;
   };
 
    Thermostat.prototype.up = function () {
-     if(this.switchCheck())
+     if(this.powerSaverStatus())
         this.getTemperature() < _MAX_LIMIT_PS ? this._temperature++ : this._temperature;
      else
      this.getTemperature() < _MAX_LIMIT ? this._temperature++ : this._temperature;
@@ -36,18 +36,12 @@ function Thermostat() {
 
   Thermostat.prototype.energyUsage = function () {
     if (this._temperature < 18)
-      return "Low Usage"
+      return "Energy Usage: Low"
     else if (this._temperature >=18 && this._temperature < 25)
-      return "Medium Usage"
+      return "Energy Usage: Medium"
     else
-      return "High Usage"
+      return "Energy Usage: High"
 
   };
-  // You can ask about the thermostat's current energy usage:
-  // < 18 is low-usage,
-  // < 25 is medium-usage,
-  // anything else is high-usage.
-
-
 
 }

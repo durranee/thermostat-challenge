@@ -29,9 +29,17 @@
     }
 
     .big-icon {
-    font-size: 4em;
+      font-size: 4em;
     }
-
+    .low {
+      color: #89b438;
+    }
+    .medium {
+      color: #b48922;
+    }
+    .high {
+      color: #a32612;
+    }
   </style>
   <body>
     <h1 class="main-h1 text-center">Thermostat</h1>
@@ -61,12 +69,15 @@
           </button>
         </div>
         <div class="temp-display text-center">
-          <h1 class = "display-3" id="text-temp">99°C</h1>
+          <h1 class = "display-3" id="text-temp">20°C</h1>
         </div>
         <div class="div-down text-center">
           <button type="button" id ="btn-down" class="btn btn-primary btn-block arrow-alt-circle-down">
             <i class="fas fa-arrow-alt-circle-down big-icon"></i>
           </button>
+        </div>
+        <div class="text-center">
+          <strong id="energy-usage"></strong>
         </div>
         </div>
 
@@ -77,30 +88,61 @@
 
     <script>
 
+
+
     $( document ).ready(function() {
+
+      function setEnergyUsageColorClass() {
+        if(thermostat.energyUsage() === "Energy Usage: Low"){
+          $("#energy-usage").removeClass();
+          $("#energy-usage").addClass("low");
+        }
+        else if(thermostat.energyUsage() === "Energy Usage: Medium"){
+          $("#energy-usage").removeClass();
+          $("#energy-usage").addClass("medium");
+        }
+        else {
+          $("#energy-usage").removeClass();
+          $("#energy-usage").addClass("high");
+        }
+      }
+
+      reprintTemperture = function(){
+        $("#text-temp").text(thermostat.getTemperature()+"°C");
+        $("#energy-usage").text(thermostat.energyUsage());
+        setEnergyUsageColorClass();
+
+
+      };
+
       thermostat = new Thermostat();
-      $("#text-temp").text(thermostat.getTemperature()+"°C");
+      reprintTemperture();
+      // $("#text-temp").text(thermostat.getTemperature()+"°C");
 
-    $( "#btn-up" ).click(function( event ) {
-      thermostat.up();
-      $("#text-temp").text(thermostat.getTemperature()+"°C");
+      $( "#btn-up" ).click(function( event ) {
+        thermostat.up();
+        reprintTemperture();
+
+        // $("#text-temp").text(thermostat.getTemperature()+"°C");
+      });
+
+      $( "#btn-down" ).click(function( event ) {
+        thermostat.down();
+        reprintTemperture();
+        // $("#text-temp").text(thermostat.getTemperature()+"°C");
+      });
+
+      $("#btn-powersaver").click(function( event){
+        thermostat.togglePowerSaver();
+      });
+
+      $("#btn-reset").click(function (event) {
+        thermostat.reset();
+        reprintTemperture();
+        // $("#text-temp").text(thermostat.getTemperature()+"°C");
+      });
+
     });
-
-    $( "#btn-down" ).click(function( event ) {
-      thermostat.down();
-      $("#text-temp").text(thermostat.getTemperature()+"°C");
-    });
-
-    $("#btn-powersaver").click(function( event){
-      thermostat.togglePowerSaver();
-    });
-
-    $("#btn-reset").click(function (event) {
-      thermostat.reset();
-      $("#text-temp").text(thermostat.getTemperature()+"°C");
-    });
-
-});
 
 
     </script>
