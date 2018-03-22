@@ -25,9 +25,17 @@ describe("Thermostat", function(){
   });
 
   it("If powersaving mode is on max temperature is set to 25 degrees", function(){
-      thermostat.switchInvert();
     for (var i = 0; i < 100; i++)
       thermostat.up();
       expect(thermostat.getTemperature()).toEqual(25);
   });
+
+  it("If powersaving mode is off max temperature is set to 32 degrees", function(){
+    thermostat.switchInvert();
+
+    for (var i = 0; i < 100; i++)
+      thermostat.up();
+      expect(thermostat.getTemperature()).toEqual(32);
+  });
+
 });

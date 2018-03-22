@@ -3,27 +3,21 @@ function Thermostat() {
   const _MIN_LIMIT = 10;
   const _MAX_LIMIT_PS = 25;
   const _MAX_LIMIT = 32;
-  this.powerSavingSwitch = true;
+  this._powerSavingSwitch = true;
 
    Thermostat.prototype.getTemperature = function () {
     return this._temperature;
   };
 
    Thermostat.prototype.switchCheck = function () {
-    return this.powerSavingSwitch;
+    return this._powerSavingSwitch;
   };
 
    Thermostat.prototype.up = function () {
-     if (this.switchCheck()) {
-        if (this.getTemperature() < _MAX_LIMIT_PS)
-          this._temperature++;
-        }
-
-        
-     else {
-     if (this.getTemperature() < _MAX_LIMIT)
-       this._temperature++;
-     }
+     if(this.switchCheck())
+        this.getTemperature() < _MAX_LIMIT_PS ? this._temperature++ : this._temperature;
+     else
+     this.getTemperature() < _MAX_LIMIT ? this._temperature++ : this._temperature;
   };
 
    Thermostat.prototype.down = function () {
@@ -33,7 +27,7 @@ function Thermostat() {
   };
 
   Thermostat.prototype.switchInvert = function () {
-    this.powerSavingSwitch = !this.powerSavingSwitch;
+    this._powerSavingSwitch = !this._powerSavingSwitch;
   }
 
 
