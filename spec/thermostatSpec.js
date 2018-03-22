@@ -43,4 +43,21 @@ describe("Thermostat", function(){
       expect(thermostat.getTemperature()).toEqual(20);
   });
 
+
+  it("returns the info on current energy usage Medium", function(){
+      expect(thermostat.energyUsage()).toEqual("Medium Usage");
+  });
+
+  it("returns the info on current energy usage Low", function(){
+    for (var i = 0; i < 5; i++)
+        thermostat.down();
+      expect(thermostat.energyUsage()).toEqual("Low Usage");
+  });
+
+  it("returns the info on current energy usage High", function(){
+    for (var i = 0; i < 10; i++)
+      thermostat.up();
+      expect(thermostat.energyUsage()).toEqual("High Usage");
+  });
+
 });

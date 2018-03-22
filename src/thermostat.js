@@ -29,10 +29,24 @@ function Thermostat() {
   Thermostat.prototype.switchInvert = function () {
     this._powerSavingSwitch = !this._powerSavingSwitch;
   }
-  
+
   Thermostat.prototype.reset = function () {
     this._temperature = 20;
   }
+
+  Thermostat.prototype.energyUsage = function () {
+    if (this._temperature < 18)
+      return "Low Usage"
+    else if (this._temperature >=18 && this._temperature < 25)
+      return "Medium Usage"
+    else
+      return "High Usage"
+
+  };
+  // You can ask about the thermostat's current energy usage:
+  // < 18 is low-usage,
+  // < 25 is medium-usage,
+  // anything else is high-usage.
 
 
 
