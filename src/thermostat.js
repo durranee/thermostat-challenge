@@ -26,7 +26,7 @@ function Thermostat() {
 
   };
 
-  Thermostat.prototype.switchInvert = function () {
+  Thermostat.prototype.togglePowerSaver = function () {
     this._powerSavingSwitch = !this._powerSavingSwitch;
   }
 
