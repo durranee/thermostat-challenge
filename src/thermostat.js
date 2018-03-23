@@ -1,8 +1,9 @@
 function Thermostat() {
-  this._temperature = 20;
+  const _DEFAULT_TEMP = 20;
   const _MIN_LIMIT = 10;
   const _MAX_LIMIT_PS = 25;
   const _MAX_LIMIT = 32;
+  this._temperature = _DEFAULT_TEMP;
   this._powerSavingSwitch = true;
 
    Thermostat.prototype.getTemperature = function () {
@@ -28,10 +29,11 @@ function Thermostat() {
 
   Thermostat.prototype.togglePowerSaver = function () {
     this._powerSavingSwitch = !this._powerSavingSwitch;
+    this._temperature = this._temperature > _MAX_LIMIT_PS ? _MAX_LIMIT_PS : this._temperature;
   }
 
   Thermostat.prototype.reset = function () {
-    this._temperature = 20;
+    this._temperature = _DEFAULT_TEMP;
   }
 
   Thermostat.prototype.energyUsage = function () {

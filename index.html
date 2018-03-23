@@ -5,7 +5,7 @@
     <title>Thermostat Challenge Using javascript (Week 5)</title>
     <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/solid.js" integrity="sha384-+Ga2s7YBbhOD6nie0DzrZpJes+b2K1xkpKxTFFcx59QmVPaSA8c7pycsNaFwUK6l" crossorigin="anonymous"></script>
     <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/fontawesome.js" integrity="sha384-7ox8Q2yzO/uWircfojVuCQOZl+ZZBg2D2J5nkpLqzH1HY0C1dHlTKIbpRz/LG23c" crossorigin="anonymous"></script>
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
     <script src="src/thermostat.js"></script>
     </head>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
@@ -40,21 +40,43 @@
     .high {
       color: #a32612;
     }
+
+    div.city-info {
+      font-weight: bold;
+    }
+
+/*  search bar extend */
+    input[type=text] {
+    width: 130px;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    background-color: white;
+    background-image: url('searchicon.png');
+    background-position: 10px 10px;
+    background-repeat: no-repeat;
+    padding: 12px 20px 12px 40px;
+    -webkit-transition: width 0.4s ease-in-out;
+    transition: width 0.4s ease-in-out;
+    }
+
+    input[type=text]:focus {
+        width: 100%;
+    }
+
   </style>
   <body>
-    <h1 class="main-h1 text-center">Thermostat</h1>
+    <h1 class="main-h1 text-center" style = "padding-top: 200px">Thermostat</h1>
 
     <div class="container">
-
-
-
-        <div class="card mx-auto" style="width: 20rem;">
+        <div class="card mx-auto" style="width: 30rem;">
         <p></p>
         <span class="div-power-saver text-center">
-          <button type="button" id="btn-powersaver" class="btn-circle toggle btn btn-success active" data-toggle="button" aria-pressed="false" autocomplete="off">
-              <i class="fa fa-heart"></i>
+          <button type="button" title="Power Saver" id="btn-powersaver" class="btn-circle toggle btn btn-success active" data-toggle="button" aria-pressed="false" autocomplete="off">
+              <i class="fas fa-leaf"></i>
           </button>
-          <button type="button" id="btn-reset" class="btn-circle btn btn-warning" aria-pressed="false" autocomplete="off">
+          <button type="button" title="Reset" id="btn-reset" class="btn-circle btn btn-warning" aria-pressed="false" autocomplete="off">
             <i class="fas fa-sync-alt"></i>
           </button>
 
@@ -65,30 +87,41 @@
 
         <div class="div-up text-center">
           <button type="button" id="btn-up" class="btn btn-danger btn-block">
-            <i class="fas fa-arrow-alt-circle-up big-icon"></i>
+            <i class="fas fa-fire big-icon"></i>
           </button>
         </div>
-        <div class="temp-display text-center">
-          <h1 class = "display-3" id="text-temp">20°C</h1>
+        <div class=" text-center row">
+          <div class="temp-display col-6">
+            <h1 class = "display-3" id="text-temp">20°C</h1>
+          </div>
+          <div id="" class="col-6">
+            <div id="city-info" class = "city-info">
+
+            </div>
+            <div class="">
+              <img id="weather-png" src="" alt=""></img>
+            </div>
+          </div>
         </div>
         <div class="div-down text-center">
           <button type="button" id ="btn-down" class="btn btn-primary btn-block arrow-alt-circle-down">
-            <i class="fas fa-arrow-alt-circle-down big-icon"></i>
+            <i class="fas fa-snowflake big-icon"></i>
           </button>
         </div>
         <div class="text-center">
           <strong id="energy-usage"></strong>
         </div>
+        <p></p>
+
+        <div class="search-container text-center">
+            <input id = "city-search" type="text" placeholder="Search.." name="search">
         </div>
 
-
-
-
+        <!-- city selector div ends -->
+        </div>
     </div>
 
     <script>
-
-
 
     $( document ).ready(function() {
 
@@ -111,40 +144,47 @@
         $("#text-temp").text(thermostat.getTemperature()+"°C");
         $("#energy-usage").text(thermostat.energyUsage());
         setEnergyUsageColorClass();
-
-
       };
+
+      function updateCityInfo() {
+        var city = document.getElementById('city-search').value
+
+        $.getJSON(`http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=12379761416befa8f8b7fa740cc99415&units=metric`, function(data) {
+          pngAddress = "http://openweathermap.org/img/w/" + data.weather[0].icon + ".png";
+          $('#weather-png').attr('src',pngAddress);
+          $('#city-info').text(data.name + " > " + data.weather[0].main + "(" + data.main['temp'] + "°C)")
+        });
+
+      }
 
       thermostat = new Thermostat();
       reprintTemperture();
-      // $("#text-temp").text(thermostat.getTemperature()+"°C");
+
+      $('#city-search').keypress(function(e) {
+          if(e.which == 13) {
+            updateCityInfo();
+          }
+      });
 
       $( "#btn-up" ).click(function( event ) {
         thermostat.up();
         reprintTemperture();
-
-        // $("#text-temp").text(thermostat.getTemperature()+"°C");
       });
 
       $( "#btn-down" ).click(function( event ) {
         thermostat.down();
-        reprintTemperture();
-        // $("#text-temp").text(thermostat.getTemperature()+"°C");
-      });
+        reprintTemperture();      });
 
       $("#btn-powersaver").click(function( event){
         thermostat.togglePowerSaver();
+        reprintTemperture();
       });
 
       $("#btn-reset").click(function (event) {
         thermostat.reset();
-        reprintTemperture();
-        // $("#text-temp").text(thermostat.getTemperature()+"°C");
-      });
+        reprintTemperture();      });
 
     });
-
-
     </script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>

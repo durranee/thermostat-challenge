@@ -30,6 +30,7 @@ describe("Thermostat", function(){
       expect(thermostat.getTemperature()).toEqual(25);
   });
 
+
   it("If powersaving mode is off max temperature is set to 32 degrees", function(){
     thermostat.togglePowerSaver();
 
@@ -37,6 +38,15 @@ describe("Thermostat", function(){
       thermostat.up();
       expect(thermostat.getTemperature()).toEqual(32);
   });
+
+  it("should set temp down to 25 if PS mode turned on while temp > 25", function(){
+    thermostat.togglePowerSaver();
+    for (var i = 0; i < 100; i++)
+      thermostat.up();
+      thermostat.togglePowerSaver();
+      expect(thermostat.getTemperature()).toEqual(25);
+  });
+
 
   it("resets the temperature to 20 degrees", function(){
       thermostat.reset();
