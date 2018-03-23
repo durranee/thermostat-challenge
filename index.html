@@ -9,62 +9,8 @@
     <script src="src/thermostat.js"></script>
     </head>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <link rel="stylesheet" href="css/index.css">
   <style>
-    .btn-circle {
-      width: 30px;
-      height: 30px;
-      padding: 6px 0px;
-      border-radius: 15px;
-      text-align: center;
-      font-size: 12px;
-      line-height: 1.42857;
-      border: 0;
-    }
-    .toggle {
-      background-color: #ccc;
-
-    }
-    .btn-block {
-      height: 100px;
-    }
-
-    .big-icon {
-      font-size: 4em;
-    }
-    .low {
-      color: #89b438;
-    }
-    .medium {
-      color: #b48922;
-    }
-    .high {
-      color: #a32612;
-    }
-
-    div.city-info {
-      font-weight: bold;
-    }
-
-/*  search bar extend */
-    input[type=text] {
-    width: 130px;
-    box-sizing: border-box;
-    border: 2px solid #ccc;
-    border-radius: 4px;
-    font-size: 16px;
-    background-color: white;
-    background-image: url('searchicon.png');
-    background-position: 10px 10px;
-    background-repeat: no-repeat;
-    padding: 12px 20px 12px 40px;
-    -webkit-transition: width 0.4s ease-in-out;
-    transition: width 0.4s ease-in-out;
-    }
-
-    input[type=text]:focus {
-        width: 100%;
-    }
-
   </style>
   <body>
     <h1 class="main-h1 text-center" style = "padding-top: 200px">Thermostat</h1>
@@ -79,10 +25,7 @@
           <button type="button" title="Reset" id="btn-reset" class="btn-circle btn btn-warning" aria-pressed="false" autocomplete="off">
             <i class="fas fa-sync-alt"></i>
           </button>
-
         </span>
-
-
         <p></p>
 
         <div class="div-up text-center">
@@ -121,72 +64,7 @@
         </div>
     </div>
 
-    <script>
-
-    $( document ).ready(function() {
-
-      function setEnergyUsageColorClass() {
-        if(thermostat.energyUsage() === "Energy Usage: Low"){
-          $("#energy-usage").removeClass();
-          $("#energy-usage").addClass("low");
-        }
-        else if(thermostat.energyUsage() === "Energy Usage: Medium"){
-          $("#energy-usage").removeClass();
-          $("#energy-usage").addClass("medium");
-        }
-        else {
-          $("#energy-usage").removeClass();
-          $("#energy-usage").addClass("high");
-        }
-      }
-
-      reprintTemperture = function(){
-        $("#text-temp").text(thermostat.getTemperature()+"°C");
-        $("#energy-usage").text(thermostat.energyUsage());
-        setEnergyUsageColorClass();
-      };
-
-      function updateCityInfo() {
-        var city = document.getElementById('city-search').value
-
-        $.getJSON(`http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=12379761416befa8f8b7fa740cc99415&units=metric`, function(data) {
-          pngAddress = "http://openweathermap.org/img/w/" + data.weather[0].icon + ".png";
-          $('#weather-png').attr('src',pngAddress);
-          $('#city-info').text(data.name + " > " + data.weather[0].main + "(" + data.main['temp'] + "°C)")
-        });
-
-      }
-
-      thermostat = new Thermostat();
-      reprintTemperture();
-
-      $('#city-search').keypress(function(e) {
-          if(e.which == 13) {
-            updateCityInfo();
-          }
-      });
-
-      $( "#btn-up" ).click(function( event ) {
-        thermostat.up();
-        reprintTemperture();
-      });
-
-      $( "#btn-down" ).click(function( event ) {
-        thermostat.down();
-        reprintTemperture();      });
-
-      $("#btn-powersaver").click(function( event){
-        thermostat.togglePowerSaver();
-        reprintTemperture();
-      });
-
-      $("#btn-reset").click(function (event) {
-        thermostat.reset();
-        reprintTemperture();      });
-
-    });
-    </script>
-
+    <script src="src/index.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
   </body>
