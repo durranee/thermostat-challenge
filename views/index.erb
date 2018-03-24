@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Thermostat Challenge Using javascript (Week 5)</title>
+    <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/solid.js" integrity="sha384-+Ga2s7YBbhOD6nie0DzrZpJes+b2K1xkpKxTFFcx59QmVPaSA8c7pycsNaFwUK6l" crossorigin="anonymous"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/fontawesome.js" integrity="sha384-7ox8Q2yzO/uWircfojVuCQOZl+ZZBg2D2J5nkpLqzH1HY0C1dHlTKIbpRz/LG23c" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
+    <script src="js/thermostat.js"></script>
+    </head>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <link rel="stylesheet" href="css/index.css" type="text/css" charset="utf-8">
+
+  <style>
+  </style>
+  <body>
+    <h1 class="main-h1 text-center" style = "padding-top: 200px">Thermostat</h1>
+
+    <div class="container">
+        <div class="card mx-auto" style="width: 30rem;">
+        <p></p>
+        <span class="div-power-saver text-center">
+          <button type="button" title="Power Saver" id="btn-powersaver" class="btn-circle toggle btn btn-success active" data-toggle="button" aria-pressed="false" autocomplete="off">
+              <i class="fas fa-leaf"></i>
+          </button>
+          <button type="button" title="Reset" id="btn-reset" class="btn-circle btn btn-warning" aria-pressed="false" autocomplete="off">
+            <i class="fas fa-sync-alt"></i>
+          </button>
+          <button type="button" title="Save" id="btn-save" class="btn-circle btn btn-info" aria-pressed="false" autocomplete="off">
+            <!-- <i class="far fa-save"></i> -->
+            <i class="fas fa-save"></i>
+          </button>
+        </span>
+        <p></p>
+
+        <div class="div-up text-center">
+          <button type="button" id="btn-up" class="btn btn-danger btn-block">
+            <i class="fas fa-fire big-icon"></i>
+          </button>
+        </div>
+        <div class=" text-center row">
+          <div class="temp-display col-6">
+            <h1 class = "display-3 text-temp" id="text-temp">20°C</h1>
+          </div>
+          <div id="" class="col-6">
+            <div id="city-info" class = "city-info">
+
+            </div>
+            <div class="">
+              <img id="weather-png" src="" alt=""></img>
+            </div>
+          </div>
+        </div>
+        <div class="div-down text-center">
+          <button type="button" id ="btn-down" class="btn btn-primary btn-block arrow-alt-circle-down">
+            <i class="fas fa-snowflake big-icon"></i>
+          </button>
+        </div>
+        <div class="text-center">
+          <strong id="energy-usage"></strong>
+        </div>
+        <p></p>
+
+        <div class="search-container text-center">
+            <input id = "city-search" type="text" placeholder="Search City.." name="search">
+        </div>
+
+        <!-- city selector div ends -->
+        </div>
+    </div>
+
+    <script src="js/index.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  </body>
+</html>

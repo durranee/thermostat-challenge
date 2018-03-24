@@ -1,0 +1,69 @@
+
+@font-face {
+    font-family: 'digital-7_monomono';
+    src: url('digital-7_mono-webfont.woff2') format('woff2'),
+         url('digital-7_mono-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+.text-temp{
+  font-size: 7em;
+  font-family: 'digital-7_monomono';
+}
+
+.btn-circle {
+  width: 30px;
+  height: 30px;
+  padding: 6px 0px;
+  border-radius: 15px;
+  text-align: center;
+  font-size: 12px;
+  line-height: 1.42857;
+  border: 0;
+}
+.toggle {
+  background-color: #ccc;
+
+}
+.btn-block {
+  height: 100px;
+}
+
+.big-icon {
+  font-size: 4em;
+}
+.low {
+  color: #89b438;
+}
+.medium {
+  color: #b48922;
+}
+.high {
+  color: #a32612;
+}
+
+div.city-info {
+  font-weight: bold;
+}
+
+/*  search bar extend */
+input[type=text] {
+width: 130px;
+box-sizing: border-box;
+border: 2px solid #ccc;
+border-radius: 4px;
+font-size: 16px;
+background-color: white;
+background-image: url('searchicon.png');
+background-position: 10px 10px;
+background-repeat: no-repeat;
+padding: 12px 20px 12px 40px;
+-webkit-transition: width 0.4s ease-in-out;
+transition: width 0.4s ease-in-out;
+}
+
+input[type=text]:focus {
+    width: 100%;
+}
